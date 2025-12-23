@@ -13,6 +13,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -37,18 +38,26 @@ public class BaseClass {
 		logger=LogManager.getLogger(this.getClass()); //Log4j
 		
 		//launching right browser based on parameter from testng xml
-		if(br.equals("chrome"))
-		{
-		driver=new ChromeDriver();
-		}
+if(br.equals("chrome"))
+    {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        driver = new ChromeDriver(options);
+    }
 		else if(br.equals("edge"))
 		{
 			driver=new EdgeDriver();
 		}
-		else
-		{
-			driver=new ChromeDriver();
-		}
+else
+    {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        driver = new ChromeDriver(options);
+    }
 		driver.manage().deleteAllCookies(); // deletes all cookies from browser
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		
