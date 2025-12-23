@@ -17,8 +17,8 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - name: Build with Maven
-        run: mvn clean package
+      - name: Build with Maven (master.xml only)
+        run: mvn clean test -Dsurefire.suiteXmlFiles=master.xml
       - name: Archive test results
         if: always()
         uses: actions/upload-artifact@v4
